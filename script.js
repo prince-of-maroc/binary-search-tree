@@ -6,6 +6,16 @@ function NodeFactory(data, left = null, right = null){
     }
 }
 
+function BSTFactory(arr){
+    return {
+        root: createBalancedTree(arr),
+
+        display(){
+            prettyPrint(this.root);
+        }
+    }
+}
+
 function createBalancedTree(arr){
     if(arr.length > 0){
         let mid = Math.floor(arr.length/2);
