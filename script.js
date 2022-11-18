@@ -69,12 +69,8 @@ function BSTFactory(arr){
         height(val){
             //
         },
-        insert(val){
-            //
-        },
-        delete(val){
-            //
-        },
+
+        // Breadth First Search
         levelOrder(cb = null){
             if(!cb){
                 // return levelOrder array
