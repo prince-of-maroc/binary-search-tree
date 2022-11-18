@@ -49,6 +49,22 @@ function BSTFactory(arr){
                 }
             }
             return null;
+        },
+        depth(node){
+            let current = this.root;
+            let depth = 0;
+            while(current){
+                if(current == node){
+                    break;
+                } else if(current.data > node.data){
+                    depth++
+                    current = current.left;
+                } else {
+                    depth++
+                    current = current.right;
+                }
+            }
+            return depth;
         }
     }
 }
