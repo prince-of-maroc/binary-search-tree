@@ -41,11 +41,10 @@ function BSTFactory(arr){
     }
 }
 
-function createBalancedTree(arr){
-    if(arr.length > 0){
-        let mid = Math.floor(arr.length/2);
-        return NodeFactory(arr[mid], createBalancedTree(arr.slice(0,mid-1)), createBalancedTree(arr.slice(mid+1, arr.length-1)));
-    }
+function createBalancedTree(arr, start = 0, end = arr.length-1){
+    if(start > end) return null
+    let mid = parseInt((start+end)/2);
+    return NodeFactory(arr[mid], createBalancedTree(arr, start, mid-1), createBalancedTree(arr, mid+1, end));
 }
 
 
@@ -63,4 +62,4 @@ let arr = [1,2,3,4,5,6,7,8];
 let myTree = BSTFactory(arr);
 
 console.log(myTree.max());
-// myTree.display();
+myTree.display();
