@@ -8,7 +8,9 @@ function NodeFactory(data, left = null, right = null){
 
 function BSTFactory(arr){
     return {
-        root: createBalancedTree([...new Set(arr.sort(function(a, b){return (a-b)}))]),
+        // root: createBalancedTree([...new Set(arr.sort(function(a, b){return (a-b)}))]),
+        root: createBalancedTree(arr),
+        count: arr.length,
 
         display(){
             prettyPrint(this.root);
@@ -18,6 +20,23 @@ function BSTFactory(arr){
         },
         delete(){
             //
+        },
+        min(){
+            let current = this.root;
+            while(current.left){
+                current = current.left;
+            }
+            return current.data;
+        },
+        max(){
+            let current = this.root;
+            while(current.right){
+                current = current.right;
+            }
+            return current.data;
+        },
+        size(){
+            return this.count;
         }
     }
 }
@@ -25,7 +44,7 @@ function BSTFactory(arr){
 function createBalancedTree(arr){
     if(arr.length > 0){
         let mid = Math.floor(arr.length/2);
-        return NodeFactory(arr[mid], createBalancedTree(arr.slice(0,mid)), createBalancedTree(arr.slice(mid, arr.length-1)));
+        return NodeFactory(arr[mid], createBalancedTree(arr.slice(0,mid-1)), createBalancedTree(arr.slice(mid+1, arr.length-1)));
     }
 }
 
@@ -39,3 +58,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
       prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
 }
+
+let arr = [1,2,3,4,5,6,7,8];
+let myTree = BSTFactory(arr);
+
+console.log(myTree.max());
+// myTree.display();
