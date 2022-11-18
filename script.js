@@ -36,6 +36,19 @@ function BSTFactory(arr){
         },
         size(){
             return this.count;
+        },
+        find(val){
+            let current = this.root;
+            while(current){
+                if(current.data == val){
+                    return current;
+                } else if(current.data > val){
+                    current = current.left;
+                } else {
+                    current = current.right;
+                }
+            }
+            return null;
         }
     }
 }
