@@ -8,10 +8,16 @@ function NodeFactory(data, left = null, right = null){
 
 function BSTFactory(arr){
     return {
-        root: createBalancedTree(arr),
+        root: createBalancedTree([...new Set(arr.sort(function(a, b){return (a-b)}))]),
 
         display(){
             prettyPrint(this.root);
+        },
+        insert(){
+            //
+        },
+        delete(){
+            //
         }
     }
 }
