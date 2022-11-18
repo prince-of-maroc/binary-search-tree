@@ -50,13 +50,13 @@ function BSTFactory(arr){
             }
             return null;
         },
-        depth(node){
+        depth(val){
             let current = this.root;
             let depth = 0;
             while(current){
-                if(current == node){
+                if(current.data == val){
                     break;
-                } else if(current.data > node.data){
+                } else if(current.data > val){
                     depth++
                     current = current.left;
                 } else {
@@ -65,6 +65,52 @@ function BSTFactory(arr){
                 }
             }
             return depth;
+        },
+        height(val){
+            //
+        },
+        insert(val){
+            //
+        },
+        delete(val){
+            //
+        },
+        levelOrder(cb = null){
+            if(!cb){
+                // return levelOrder array
+            } else {
+                // apply callback function to nodes in levelorder
+            }
+        },
+        
+        // Depth First Search
+        inOrder(cb = null){
+            if(!cb){
+                // return inOrder array
+            } else {
+                // apply callback function to nodes
+            }
+        },
+        preOrder(cb = null){
+            if(!cb){
+                // return preOrder array
+            } else {
+                // apply callback function to nodes
+            }
+        },
+        postOrder(cb = null){
+            if(!cb){
+                // return postOrder array
+            } else {
+                // apply callback function to nodes
+            }
+        },
+
+        isBalanced(){
+            //
+        },
+        rebalance(){
+            //
         }
     }
 }
