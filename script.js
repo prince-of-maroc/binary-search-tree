@@ -18,34 +18,48 @@ function BSTFactory(arr){
             //
         },
         delete(value){
-            const getNode = value => {
-                let current = this.root;
-                while(current.data != value){
-                    if(current.data > value){
-                        current = current.left;
-                    } else if(current.data < value){
-                        current = current.right;
-                    } if(!current){
-                        return null;
+            let node = this.find(value);
+            if(node){ // If node exists
+                let parent = this.getParent(node);
+                if(!node.left && !node.right){ // Leaf Node Case
+                    if(parent.leftBranch){
+                        parent.node.left = null;
+                    } else {
+                        parent.node.right = null;
+                    }
+                } else if(node.left && node.right){ // Parent Node with two children branch case
+                    //
+                } else if(node.left || node.right){ // Parent node with one child branch case
+                    //
+                }
+            }
+        },
+        getParent(node){
+            let current = this.root;
+            if(node == this.root){
+                console.log("Root has no parents");
+                return null
+            } else {
+                while(current.left || current.right){
+                    if(current.left == node){
+                        return {
+                            node: current,
+                            leftBranch: true
+                        }
+                    } else if(current.right == node){
+                        return {
+                            node: current,
+                            leftBranch: false
+                        }
+                    } else {
+                        if(current.data > node.data){
+                            current = current.left;
+                        } else {
+                            current = current.right;
+                        }
                     }
                 }
-                return current;
-            }
-            let node = getNode(value);
-            let current = this.root;
-            while(current.left != node && current.right != node){
-                if(current.data > value){
-                    current = current.left;
-                } else if(current.data < value){
-                    current = current.right;
-                }
-            }
-            if(!node.left && !node.right){
-                if(current.right == node){
-                    current.right = null;
-                } else if(current.left == node){
-                    current.left = null;
-                }
+                return null;
             }
         },
         min(){
