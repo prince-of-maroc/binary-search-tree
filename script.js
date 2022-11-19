@@ -17,8 +17,36 @@ function BSTFactory(arr){
         insert(){
             //
         },
-        delete(){
-            //
+        delete(value){
+            const getNode = value => {
+                let current = this.root;
+                while(current.data != value){
+                    if(current.data > value){
+                        current = current.left;
+                    } else if(current.data < value){
+                        current = current.right;
+                    } if(!current){
+                        return null;
+                    }
+                }
+                return current;
+            }
+            let node = getNode(value);
+            let current = this.root;
+            while(current.left != node && current.right != node){
+                if(current.data > value){
+                    current = current.left;
+                } else if(current.data < value){
+                    current = current.right;
+                }
+            }
+            if(!node.left && !node.right){
+                if(current.right == node){
+                    current.right = null;
+                } else if(current.left == node){
+                    current.left = null;
+                }
+            }
         },
         min(){
             let current = this.root;
