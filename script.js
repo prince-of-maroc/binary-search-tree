@@ -14,8 +14,23 @@ function BSTFactory(arr){
         display(){
             prettyPrint(this.root);
         },
-        insert(){
-            //
+        insert(value, current = this.root){
+            let newNode = NodeFactory(value);
+            if(value == current.data){
+                return null;
+            } else if(value < current.data){
+                if(!current.left){
+                    current.left = newNode;
+                } else {
+                    this.insert(value, current.left);
+                }
+            } else if(value > current.data){
+                if(!current.right){
+                    current.right = newNode;
+                } else {
+                    this.insert(value, current.right);
+                }
+            }
         },
         delete(value){
             let node = this.find(value);
