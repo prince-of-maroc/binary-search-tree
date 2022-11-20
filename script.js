@@ -137,13 +137,19 @@ function BSTFactory(arr){
         
         // Depth First Search
         inOrder(cb = null){
-            if(!cb){
-                // return inOrder array
-            } else {
-                // apply callback function to nodes
+            let arr = [];
+            const traverse = root => {
+                if(root.left) traverse(root.left)
+                arr.push(root.data);
+                if(root.right) traverse(root.right);
             }
+            traverse(this.root)
+            return arr;
         },
         preOrder(cb = null){
+            let arr = [];
+
+            
             if(!cb){
                 // return preOrder array
             } else {
@@ -151,6 +157,9 @@ function BSTFactory(arr){
             }
         },
         postOrder(cb = null){
+            let arr = [];
+
+            
             if(!cb){
                 // return postOrder array
             } else {
@@ -183,3 +192,10 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
       prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
 }
+
+let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+let myTree = BSTFactory(arr);
+myTree.insert(24)
+myTree.delete(24)
+myTree.display()
+console.log(myTree.inOrder())
