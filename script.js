@@ -56,34 +56,6 @@ function BSTFactory(arr){
 
             this.root = deleteNode(value);
         },
-        getParent(node){
-            let current = this.root;
-            if(node == this.root){
-                console.log("Root has no parents");
-                return null
-            } else {
-                while(current.left || current.right){
-                    if(current.left == node){
-                        return {
-                            node: current,
-                            leftBranch: true
-                        }
-                    } else if(current.right == node){
-                        return {
-                            node: current,
-                            leftBranch: false
-                        }
-                    } else {
-                        if(current.data > node.data){
-                            current = current.left;
-                        } else {
-                            current = current.right;
-                        }
-                    }
-                }
-                return null;
-            }
-        },
         min(current = this.root){
             while(current.left){
                 current = current.left;
