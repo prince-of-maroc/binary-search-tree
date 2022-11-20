@@ -180,10 +180,11 @@ function BSTFactory(arr){
         },
 
         isBalanced(){
-            //
+            
         },
         rebalance(){
-            //
+            let arr = this.inOrder();
+            this.root = buildTree(arr)
         }
     }
 }
@@ -204,10 +205,3 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
       prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
 }
-
-let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-let myTree = BSTFactory(arr);
-myTree.insert(24)
-myTree.delete(24)
-myTree.display()
-console.log(myTree.postOrder())
