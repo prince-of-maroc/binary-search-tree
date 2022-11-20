@@ -139,31 +139,43 @@ function BSTFactory(arr){
         inOrder(cb = null){
             let arr = [];
             const traverse = root => {
-                if(root.left) traverse(root.left)
+                if(root.left) traverse(root.left);
                 arr.push(root.data);
                 if(root.right) traverse(root.right);
             }
             traverse(this.root)
-            return arr;
+            if(!cb){
+                return arr;
+            } else {
+                return cb(arr);
+            }
         },
         preOrder(cb = null){
             let arr = [];
-
-            
+            const traverse = root => {
+                arr.push(root.data)
+                if(root.left) traverse(root.left);
+                if(root.right) traverse(root.right);
+            }
+            traverse(this.root);
             if(!cb){
-                // return preOrder array
+                return arr;
             } else {
-                // apply callback function to nodes
+                return cb(arr);
             }
         },
         postOrder(cb = null){
             let arr = [];
-
-            
+            const traverse = root => {
+                if(root.left) traverse(root.left);
+                if(root.right) traverse(root.right);
+                arr.push(root.data)
+            }
+            traverse(this.root);
             if(!cb){
-                // return postOrder array
+                return arr;
             } else {
-                // apply callback function to nodes
+                return cb(arr);
             }
         },
 
@@ -198,4 +210,4 @@ let myTree = BSTFactory(arr);
 myTree.insert(24)
 myTree.delete(24)
 myTree.display()
-console.log(myTree.inOrder())
+console.log(myTree.postOrder())
