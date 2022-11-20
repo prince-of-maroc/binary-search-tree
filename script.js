@@ -125,12 +125,26 @@ function BSTFactory(arr){
             }
             return depth;
         },
-        height(val){
-            //
+        height(val = this.root.data){
+            const getHeight = node => {
+                if(!node){
+                    return
+                }
+                if(!node.left && !node.right){
+                    return 1;
+                } else {
+                    let leftHeight = 1 + getHeight(node.left);
+                    let rightHeight = 1 + getHeight(node.right);
+                    return (leftHeight > rightHeight ? leftHeight : rightHeight);
+                }
+            }
+            let node = this.find(val);
+            return getHeight(node);
         },
 
         // Breadth First Search
         levelOrder(cb = null){
+
             if(!cb){
                 // return levelOrder array
             } else {
@@ -186,4 +200,3 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
       prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
 }
-
