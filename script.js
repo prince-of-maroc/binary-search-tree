@@ -116,12 +116,26 @@ function BSTFactory(arr){
 
         // Breadth First Search
         levelOrder(cb = null){
-
-            if(!cb){
-                // return levelOrder array
-            } else {
-                // apply callback function to nodes in levelorder
+            let queue = [this.root];
+            let arr = [];
+            while(queue.length > 0){
+                let node = queue[0];
+                if(node.left != null){
+                    queue.push(queue[0].left);
+                } if(node.right != null){
+                    queue.push(queue[0].right);
+                }
+                let remove = queue.shift();
+                arr.push(remove.data);
             }
+            // if(!cb){
+            //     return arr;
+            // } else {
+            //     arr.forEach(val => {
+            //         cb(val);
+            //     })
+            //     return arr;
+            // }
         },
         
         // Depth First Search
