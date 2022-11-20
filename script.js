@@ -128,14 +128,11 @@ function BSTFactory(arr){
                 let remove = queue.shift();
                 arr.push(remove.data);
             }
-            // if(!cb){
-            //     return arr;
-            // } else {
-            //     arr.forEach(val => {
-            //         cb(val);
-            //     })
-            //     return arr;
-            // }
+            if(!cb){
+                return arr;
+            } else {
+                return cb(arr);
+            }
         },
         
         // Depth First Search
