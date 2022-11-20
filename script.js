@@ -9,7 +9,6 @@ function NodeFactory(data, left = null, right = null){
 function BSTFactory(arr){
     return {
         root: buildTree([...new Set(arr.sort((x,y)=>x-y))]),
-        count: arr.length,
 
         display(){
             prettyPrint(this.root);
@@ -33,21 +32,29 @@ function BSTFactory(arr){
             }
         },
         delete(value){
-            let node = this.find(value);
-            if(node){ // If node exists
-                let parent = this.getParent(node);
-                if(!node.left && !node.right){ // Leaf Node Case
-                    if(parent.leftBranch){
-                        parent.node.left = null;
+            const deleteNode = (value, root = this.root) => {
+                if(!root){
+                    return root;
+                } if(root.data > value){
+                    root.left = deleteNode(value, root.left);
+                } else if(root.data < value){
+                    root.right = deleteNode(value, root.right);
+                } else {
+                    if(!root.left && !root.right){
+                        return null;
+                    } else if(!root.left){
+                        return root.right;
+                    } else if(!root.right){
+                        return root.left;
                     } else {
-                        parent.node.right = null;
+                        root.data = (this.min(root.right)).data;
+                        deleteNode(root.data, root.right);
                     }
-                } else if(node.left && node.right){ // Parent Node with two children branch case
-                    //
-                } else if(node.left || node.right){ // Parent node with one child branch case
-                    //
                 }
+                return root;
             }
+
+            this.root = deleteNode(value);
         },
         getParent(node){
             let current = this.root;
@@ -77,22 +84,17 @@ function BSTFactory(arr){
                 return null;
             }
         },
-        min(){
-            let current = this.root;
+        min(current = this.root){
             while(current.left){
                 current = current.left;
             }
-            return current.data;
+            return current;
         },
-        max(){
-            let current = this.root;
+        max(current = this.root){
             while(current.right){
                 current = current.right;
             }
             return current.data;
-        },
-        size(){
-            return this.count;
         },
         find(val){
             let current = this.root;
@@ -184,3 +186,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
       prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
 }
+
