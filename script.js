@@ -127,7 +127,8 @@ function BSTFactory(arr){
                 arr.push(remove.data);
             }
             if(!cb){
-                return arr;
+                console.log(arr);
+                return arr
             } else {
                 return cb(arr);
             }
@@ -143,6 +144,7 @@ function BSTFactory(arr){
             }
             traverse(this.root)
             if(!cb){
+                console.log(arr);
                 return arr;
             } else {
                 return cb(arr);
@@ -157,7 +159,8 @@ function BSTFactory(arr){
             }
             traverse(this.root);
             if(!cb){
-                return arr;
+                console.log(arr);
+                return arr
             } else {
                 return cb(arr);
             }
@@ -171,7 +174,8 @@ function BSTFactory(arr){
             }
             traverse(this.root);
             if(!cb){
-                return arr;
+                console.log(arr);
+                return arr
             } else {
                 return cb(arr);
             }
@@ -186,6 +190,7 @@ function BSTFactory(arr){
         },
         rebalance(){
             let arr = this.inOrder();
+            console.log(arr)
             this.root = buildTree(arr)
         }
     }
@@ -207,3 +212,22 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
       prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
 }
+
+let randomArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+let binaryTree = BSTFactory(randomArr);
+console.log(`Binary tree is balanced: ${binaryTree.isBalanced()}`);
+binaryTree.display();
+binaryTree.preOrder();
+
+binaryTree.insert(24);
+binaryTree.insert(25);
+binaryTree.insert(26);
+binaryTree.insert(27);
+binaryTree.display();
+console.log(`Binary tree is balanced: ${binaryTree.isBalanced()}`);
+
+binaryTree.rebalance();
+binaryTree.display();
+console.log(`Binary tree is balanced: ${binaryTree.isBalanced()}`);
+binaryTree.preOrder();
+binaryTree.inOrder();
