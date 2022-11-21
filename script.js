@@ -97,12 +97,11 @@ function BSTFactory(arr){
             }
             return depth;
         },
-        height(val = this.root.data){
+        height(node = this.root){
             const getHeight = node => {
                 if(!node){
-                    return
-                }
-                if(!node.left && !node.right){
+                    return 0;
+                } else if(!node.left && !node.right){
                     return 1;
                 } else {
                     let leftHeight = 1 + getHeight(node.left);
@@ -110,7 +109,6 @@ function BSTFactory(arr){
                     return (leftHeight > rightHeight ? leftHeight : rightHeight);
                 }
             }
-            let node = this.find(val);
             return getHeight(node);
         },
 
@@ -179,8 +177,12 @@ function BSTFactory(arr){
             }
         },
 
-        isBalanced(){
-            
+        isBalanced(root = this.root){
+            if (!root) return;
+            let leftHeight = this.height(root.left);
+            let rightHeight = this.height(root.right);
+            let diff = Math.abs(leftHeight - rightHeight);
+            return diff < 1;
         },
         rebalance(){
             let arr = this.inOrder();
